@@ -1,0 +1,131 @@
+/* ARCHITECT'S TERMINAL - CORE SPEC 2026
+   Theme: Deep Focus | Principle: Organic Precision
+*/
+
+:root {
+  /* --- Palette --- */
+  --color-obsidian: #0A0A0B;
+  --color-tungsten: #161617;
+  --color-signal: #2DD4BF; /* Bio-Luminescent Teal */
+  --color-signal-muted: rgba(45, 212, 191, 0.1);
+  --text-primary: rgba(244, 244, 245, 0.9);
+  --text-secondary: rgba(244, 244, 245, 0.6);
+
+  /* --- Glassmorphism 3.0 --- */
+  --glass-bg: rgba(22, 22, 23, 0.6);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-blur: blur(20px) saturate(180%);
+
+  /* --- Motion Physics (Spring Config) --- */
+  --spring-duration: 0.4s;
+  --spring-easing: cubic-bezier(0.175, 0.885, 0.32, 1.1); /* "The Snappy Click" */
+
+  /* --- Grid System --- */
+  --grid-unit: 8px;
+  --bento-gap: 24px;
+}
+
+/* --- Base Reset --- */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-obsidian);
+  color: var(--text-primary);
+  font-family: 'Geist', 'Inter Tight', system-ui, sans-serif;
+  line-height: 1.5;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* --- Typography Scale --- */
+h1, h2, h3, h4 {
+  letter-spacing: -0.04em;
+  font-weight: 600;
+}
+
+.mono {
+  font-family: 'JetBrains Mono', 'Berkeley Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+/* --- Component Primitives --- */
+
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--bento-gap);
+  padding: var(--bento-gap);
+}
+
+@media (max-width: 768px) {
+  .bento-grid {
+    grid-template-columns: 1fr;
+    padding: calc(var(--bento-gap) / 2);
+  }
+}
+
+.glass-pane {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  transition:
+    transform var(--spring-duration) var(--spring-easing),
+    border-color 0.3s ease;
+}
+
+.glass-pane:hover {
+  border-color: var(--color-signal);
+  transform: translateY(-4px) scale(1.01);
+}
+
+/* --- Interaction Utilities --- */
+.magnetic-area {
+  position: relative;
+}
+
+a {
+  color: var(--color-signal);
+  text-decoration: none;
+  transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+a:hover {
+  opacity: 0.9;
+}
+
+/* --- Section spacing --- */
+section {
+  padding: calc(var(--bento-gap) * 3) 0;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+section:first-of-type {
+  padding-top: calc(80px + var(--bento-gap) * 2);
+}
+
+@media (max-width: 768px) {
+  section {
+    padding: calc(var(--bento-gap) * 2) var(--bento-gap);
+  }
+  section:first-of-type {
+    padding-top: calc(72px + var(--bento-gap));
+  }
+}
