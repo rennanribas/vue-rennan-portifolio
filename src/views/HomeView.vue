@@ -1,9 +1,18 @@
 <script setup lang="ts">
+import { ref, onMounted, nextTick } from 'vue'
 import GlassPane from '@/components/GlassPane.vue'
+
+const ready = ref(false)
+
+onMounted(() => {
+  nextTick(() => {
+    ready.value = true
+  })
+})
 </script>
 
 <template>
-  <div class="home">
+  <div class="home" :class="{ 'home--ready': ready }">
     <section id="hero" class="hero">
         <div class="hero__content">
           <p class="mono hero__label">Remote-ready</p>
@@ -141,6 +150,35 @@ import GlassPane from '@/components/GlassPane.vue'
   margin: 0 auto;
 }
 
+/* Hero stagger: invisible until .home--ready, then animate in sequence */
+.hero__label,
+.hero__title,
+.hero__subtitle,
+.hero__links,
+.hero__actions {
+  opacity: 0;
+}
+
+.home--ready .hero__label {
+  animation: fade-in-up 0.4s var(--ease-out) calc(var(--stagger-step) * 0) forwards;
+}
+
+.home--ready .hero__title {
+  animation: fade-in-up 0.4s var(--ease-out) calc(var(--stagger-step) * 1) forwards;
+}
+
+.home--ready .hero__subtitle {
+  animation: fade-in-up 0.4s var(--ease-out) calc(var(--stagger-step) * 2) forwards;
+}
+
+.home--ready .hero__links {
+  animation: fade-in-up 0.4s var(--ease-out) calc(var(--stagger-step) * 3) forwards;
+}
+
+.home--ready .hero__actions {
+  animation: fade-in-up 0.4s var(--ease-out) calc(var(--stagger-step) * 4) forwards;
+}
+
 .hero__label {
   display: inline-block;
   margin-bottom: var(--gap);
@@ -185,6 +223,25 @@ import GlassPane from '@/components/GlassPane.vue'
   flex-wrap: wrap;
   gap: var(--gap);
   justify-content: center;
+}
+
+/* Sections: reveal in order after hero (lifecycle-driven) */
+.about,
+.projects,
+.contact {
+  opacity: 0;
+}
+
+.home--ready .about {
+  animation: fade-in-up 0.45s var(--ease-out) 0.28s forwards;
+}
+
+.home--ready .projects {
+  animation: fade-in-up 0.45s var(--ease-out) 0.4s forwards;
+}
+
+.home--ready .contact {
+  animation: fade-in-up 0.45s var(--ease-out) 0.52s forwards;
 }
 
 .hero__btn {

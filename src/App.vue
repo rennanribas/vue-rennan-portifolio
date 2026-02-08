@@ -9,7 +9,11 @@ import { RouterView } from 'vue-router'
     <a href="#main" class="skip-link">Skip to main content</a>
     <AppHeader />
     <main id="main">
-      <RouterView />
+      <RouterView v-slot="{ Component }">
+        <Transition name="page" mode="out-in">
+          <component :is="Component" :key="$route.path" />
+        </Transition>
+      </RouterView>
     </main>
     <AppFooter />
   </div>

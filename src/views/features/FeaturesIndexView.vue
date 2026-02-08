@@ -43,8 +43,13 @@ const features = [
     <p class="feature-page__lead">
       Technical reference for Vue 3 runtime and tooling. Each section includes a short explanation and the underlying source.
     </p>
-    <ul class="features-list">
-      <li v-for="f in features" :key="f.to" class="features-list__item">
+    <TransitionGroup name="list" tag="ul" class="features-list" appear>
+      <li
+        v-for="(f, i) in features"
+        :key="f.to"
+        class="features-list__item"
+        :style="{ '--i': i }"
+      >
         <GlassPane :no-hover="true" class="features-list__card">
           <RouterLink :to="f.to" class="features-list__link">
             <h2 class="features-list__title">{{ f.title }}</h2>
@@ -53,7 +58,7 @@ const features = [
           </RouterLink>
         </GlassPane>
       </li>
-    </ul>
+    </TransitionGroup>
   </div>
 </template>
 
@@ -63,6 +68,19 @@ const features = [
   display: flex;
   flex-direction: column;
   gap: var(--gap);
+}
+
+/* Staggered list enter (TransitionGroup appear) */
+.features-list__item.list-enter-active {
+  transition:
+    opacity 0.35s var(--ease-out),
+    transform 0.35s var(--ease-out);
+  transition-delay: calc(var(--i, 0) * var(--stagger-step));
+}
+
+.features-list__item.list-enter-from {
+  opacity: 0;
+  transform: translateY(10px);
 }
 
 .features-list__card {
