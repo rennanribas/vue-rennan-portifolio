@@ -1,64 +1,24 @@
 <script setup lang="ts">
-import AppHeader from '@/components/AppHeader.vue'
 import GlassPane from '@/components/GlassPane.vue'
-
-const experience = [
-  {
-    company: 'Your Company',
-    role: 'Software Engineer',
-    dates: '2023 — Present',
-    description:
-      'Building and maintaining services and products. Collaborating with design and product to ship features that scale.',
-    span: 6,
-  },
-  {
-    company: 'Previous Role',
-    role: 'Software Developer',
-    dates: '2021 — 2023',
-    description:
-      'Developed web and backend solutions. Improved performance and reliability of core systems.',
-    span: 6,
-  },
-]
-
-const projects = [
-  {
-    title: 'Project Alpha',
-    tag: 'Web · Backend',
-    description: 'A full-stack product with modern tooling and clear architecture.',
-    url: '#',
-  },
-  {
-    title: 'Project Beta',
-    tag: 'Mobile · API',
-    description: 'Native app with a robust API and thoughtful UX.',
-    url: '#',
-  },
-  {
-    title: 'Project Gamma',
-    tag: 'Open source',
-    description: 'Developer tooling and libraries used by the community.',
-    url: '#',
-  },
-]
 </script>
 
 <template>
   <div class="home">
-    <AppHeader />
-    <main>
-      <section id="hero" class="hero">
+    <section id="hero" class="hero">
         <div class="hero__content">
-          <p class="mono hero__label">Software Engineer</p>
+          <p class="mono hero__label">Remote-ready</p>
           <h1 class="hero__title">
             Rennan <span class="hero__accent">Ribas</span>
           </h1>
           <p class="hero__subtitle">
-            I build reliable systems and polished products — from backend APIs to native and web apps.
+            Senior Software Engineer. This site is a Vue project — modern stack, official docs, lean code.
+          </p>
+          <p class="mono hero__links">
+            rennanrr@gmail.com · github.com/rennanribas · linkedin.com/in/rennan-ribas
           </p>
           <div class="hero__actions">
-            <a href="#projects" class="hero__btn hero__btn--primary">View work</a>
-            <a href="#contact" class="hero__btn hero__btn--secondary">Get in touch</a>
+            <a href="#contact" class="hero__btn hero__btn--primary">Get in touch</a>
+            <a href="#this-site" class="hero__btn hero__btn--secondary">This site</a>
           </div>
         </div>
       </section>
@@ -68,91 +28,43 @@ const projects = [
           <span class="mono section-title__label">01</span>
           About
         </h2>
-        <div class="bento-grid about__grid">
-          <GlassPane :no-hover="true" class="about__card about__card--wide">
-            <p class="about__text">
-              I'm a Software Engineer focused on clean architecture, performance, and user experience.
-              I work across the stack — backend services, web frontends, and mobile — and care about
-              maintainable code and clear communication.
-            </p>
-            <p class="about__text">
-              When I'm not shipping features, I'm likely exploring new tools, contributing to
-              open source, or improving my own side projects.
-            </p>
-          </GlassPane>
-          <GlassPane :no-hover="true" class="about__card">
-            <h3 class="about__card-title">Focus</h3>
-            <ul class="about__list">
-              <li>Backend & APIs</li>
-              <li>Web & mobile apps</li>
-              <li>System design</li>
-              <li>Developer experience</li>
-            </ul>
-          </GlassPane>
-        </div>
+        <GlassPane :no-hover="true" class="about__card">
+          <p class="about__text">
+            I'm Rennan. I like building things with care: clear structure, less code, and details that matter.
+            This portfolio is one of those — a place to introduce myself and to use Vue the way the docs recommend,
+            with no extra frameworks unless they earn their place, and then used to the last drop.
+          </p>
+        </GlassPane>
       </section>
 
-      <section id="experience" class="experience">
+      <section id="this-site" class="projects">
         <h2 class="section-title">
           <span class="mono section-title__label">02</span>
-          Experience
-        </h2>
-        <div class="bento-grid experience__grid">
-          <GlassPane
-            v-for="(job, i) in experience"
-            :key="job.company"
-            class="experience__card"
-            :class="job.span ? `experience__card--span-${job.span}` : ''"
-          >
-            <span class="mono experience__dates">{{ job.dates }}</span>
-            <h3 class="experience__role">{{ job.role }}</h3>
-            <p class="experience__company">{{ job.company }}</p>
-            <p class="experience__desc">{{ job.description }}</p>
-          </GlassPane>
-        </div>
-      </section>
-
-      <section id="projects" class="projects">
-        <h2 class="section-title">
-          <span class="mono section-title__label">03</span>
-          Selected work
+          This site
         </h2>
         <div class="bento-grid projects__grid">
-          <GlassPane
-            v-for="project in projects"
-            :key="project.title"
-            tag="a"
-            :href="project.url"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="projects__card"
-          >
-            <span class="mono projects__tag">{{ project.tag }}</span>
-            <h3 class="projects__title">{{ project.title }}</h3>
-            <p class="projects__desc">{{ project.description }}</p>
+          <GlassPane :no-hover="true" class="projects__card projects__card--static">
+            <span class="mono projects__tag">Vue 3 · Vite · TypeScript</span>
+            <h3 class="projects__title">Portfolio</h3>
+            <p class="projects__desc">
+              Built with Composition API and &lt;script setup&gt;, Vue Router, and the design system in the repo.
+              Lean markup and CSS, glassmorphism and spring-style motion. No resume here — just an intro and this project.
+            </p>
           </GlassPane>
         </div>
       </section>
 
       <section id="contact" class="contact">
         <h2 class="section-title">
-          <span class="mono section-title__label">04</span>
+          <span class="mono section-title__label">03</span>
           Contact
         </h2>
         <GlassPane :no-hover="true" class="contact__card">
           <p class="contact__text">
-            I'm open to new opportunities and conversations. Reach out via email or LinkedIn.
+            Open to conversations. Reach out by email or LinkedIn.
           </p>
           <div class="contact__links">
-            <a href="mailto:hello@rennanribas.com" class="contact__link">hello@rennanribas.com</a>
-            <a
-              href="https://linkedin.com/in/rennanribas"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="contact__link"
-            >
-              LinkedIn
-            </a>
+            <a href="mailto:rennanrr@gmail.com" class="contact__link">rennanrr@gmail.com</a>
             <a
               href="https://github.com/rennanribas"
               target="_blank"
@@ -161,211 +73,191 @@ const projects = [
             >
               GitHub
             </a>
+            <a
+              href="https://linkedin.com/in/rennan-ribas"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="contact__link"
+            >
+              LinkedIn
+            </a>
           </div>
         </GlassPane>
       </section>
-    </main>
-    <footer class="footer">
-      <p class="mono footer__copy">© {{ new Date().getFullYear() }} Rennan Ribas</p>
-    </footer>
   </div>
 </template>
 
 <style scoped>
+.skip-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 101;
+  padding: 12px var(--container);
+  background: var(--accent);
+  color: var(--bg);
+  font-weight: 600;
+  transform: translateY(-100%);
+  transition: transform var(--duration) var(--ease-out);
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
 .section-title {
-  margin-bottom: var(--bento-gap);
-  padding-left: var(--bento-gap);
+  margin-bottom: var(--gap);
   font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
   display: flex;
   align-items: baseline;
   gap: 12px;
 }
 
 .section-title__label {
-  color: var(--color-signal);
-  font-size: 0.7rem;
+  color: var(--accent);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
 }
 
 /* Hero */
 .hero {
-  padding-top: calc(80px + var(--bento-gap) * 3);
-  padding-bottom: calc(var(--bento-gap) * 4);
+  padding-top: calc(var(--header-height) + var(--gap) * 3);
+  padding-bottom: calc(var(--gap) * 5);
   text-align: center;
 }
 
+@media (min-width: 769px) {
+  .hero {
+    padding-top: calc(var(--header-height) + var(--gap) * 4);
+    padding-bottom: calc(var(--gap) * 6);
+  }
+}
+
 .hero__content {
-  max-width: 640px;
+  max-width: 520px;
   margin: 0 auto;
 }
 
 .hero__label {
-  margin-bottom: var(--grid-unit);
-  color: var(--color-signal);
+  display: inline-block;
+  margin-bottom: var(--gap);
+  padding: 6px 14px;
+  border-radius: 6px;
+  background: var(--accent-muted);
+  color: var(--accent);
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
 }
 
 .hero__title {
-  font-size: clamp(2.5rem, 8vw, 4rem);
-  line-height: 1.1;
-  margin-bottom: var(--bento-gap);
-  letter-spacing: -0.03em;
+  font-size: clamp(2.75rem, 10vw, 4.5rem);
+  line-height: 1.02;
+  margin-bottom: var(--gap);
+  letter-spacing: -0.04em;
+  font-weight: 700;
+  overflow-wrap: break-word;
 }
 
 .hero__accent {
-  color: var(--color-signal);
+  color: var(--accent);
 }
 
 .hero__subtitle {
-  font-size: 1.125rem;
-  color: var(--text-secondary);
-  margin-bottom: calc(var(--bento-gap) * 1.5);
+  font-size: clamp(1rem, 2.2vw, 1.125rem);
+  color: var(--text-muted);
+  margin-bottom: var(--gap);
+  line-height: 1.65;
+}
+
+.hero__links {
+  font-size: 0.75rem;
+  color: var(--text-subtle);
+  margin-bottom: calc(var(--gap) * 2);
   line-height: 1.6;
+  overflow-wrap: break-word;
 }
 
 .hero__actions {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--bento-gap);
+  gap: var(--gap);
   justify-content: center;
 }
 
 .hero__btn {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
   padding: 14px 28px;
-  border-radius: 12px;
+  border-radius: var(--radius);
   font-weight: 600;
   font-size: 0.9375rem;
+  letter-spacing: -0.01em;
   transition:
-    background var(--spring-duration) var(--spring-easing),
-    color var(--spring-duration) var(--spring-easing),
-    transform var(--spring-duration) var(--spring-easing);
+    background var(--duration) var(--ease-out),
+    color var(--duration) var(--ease-out),
+    border-color var(--duration) var(--ease-out),
+    transform var(--duration) var(--ease-out),
+    box-shadow var(--duration) var(--ease-out);
 }
 
 .hero__btn--primary {
-  background: var(--color-signal);
-  color: var(--color-obsidian);
+  background: var(--accent);
+  color: var(--bg);
 }
 
 .hero__btn--primary:hover {
-  filter: brightness(1.08);
+  filter: brightness(1.06);
   transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(167, 139, 250, 0.28);
 }
 
 .hero__btn--secondary {
-  border: 1px solid var(--glass-border);
-  color: var(--text-primary);
+  border: 1px solid var(--border);
+  color: var(--text);
+  background: transparent;
 }
 
 .hero__btn--secondary:hover {
-  border-color: var(--color-signal);
-  color: var(--color-signal);
+  border-color: var(--border-hover);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.hero__btn:focus-visible {
+  outline-offset: 3px;
 }
 
 /* About */
-.about__grid {
-  margin-top: calc(var(--bento-gap) * 0.5);
-}
-
 .about__card {
-  padding: calc(var(--bento-gap) * 1.5);
-}
-
-.about__card--wide {
-  grid-column: span 8;
-}
-
-@media (max-width: 768px) {
-  .about__card--wide {
-    grid-column: 1;
-  }
+  margin-top: calc(var(--gap) * 0.5);
+  padding: calc(var(--gap) * 1.75);
+  max-width: 580px;
 }
 
 .about__text {
-  color: var(--text-secondary);
-  line-height: 1.7;
-  margin-bottom: 1em;
-}
-
-.about__text:last-child {
-  margin-bottom: 0;
-}
-
-.about__card-title {
+  color: var(--text-muted);
   font-size: 1rem;
-  margin-bottom: 12px;
-  color: var(--text-primary);
-}
-
-.about__list {
-  list-style: none;
-  color: var(--text-secondary);
-  font-size: 0.9375rem;
-  line-height: 1.8;
-}
-
-.about__list li::before {
-  content: '→ ';
-  color: var(--color-signal);
-}
-
-/* Experience */
-.experience__grid {
-  margin-top: calc(var(--bento-gap) * 0.5);
-}
-
-.experience__card {
-  padding: calc(var(--bento-gap) * 1.5);
-}
-
-.experience__card--span-6 {
-  grid-column: span 6;
-}
-
-@media (max-width: 768px) {
-  .experience__card--span-6 {
-    grid-column: 1;
-  }
-}
-
-.experience__dates {
-  display: block;
-  margin-bottom: 8px;
-  font-size: 0.7rem;
-  color: var(--color-signal);
-}
-
-.experience__role {
-  font-size: 1.125rem;
-  margin-bottom: 4px;
-}
-
-.experience__company {
-  color: var(--text-secondary);
-  font-size: 0.9375rem;
-  margin-bottom: 12px;
-}
-
-.experience__desc {
-  color: var(--text-secondary);
-  font-size: 0.9375rem;
-  line-height: 1.6;
+  line-height: 1.75;
 }
 
 /* Projects */
+.projects__card--static {
+  cursor: default;
+}
+
 .projects__grid {
-  margin-top: calc(var(--bento-gap) * 0.5);
+  margin-top: calc(var(--gap) * 0.5);
 }
 
 .projects__card {
-  padding: calc(var(--bento-gap) * 1.5);
+  padding: calc(var(--gap) * 1.75);
   display: block;
   color: inherit;
-  grid-column: span 4;
-}
-
-@media (max-width: 900px) {
-  .projects__card {
-    grid-column: span 6;
-  }
+  grid-column: span 6;
 }
 
 @media (max-width: 600px) {
@@ -379,55 +271,66 @@ const projects = [
 }
 
 .projects__tag {
-  display: block;
-  margin-bottom: 8px;
-  font-size: 0.65rem;
-  color: var(--color-signal);
+  display: inline-block;
+  margin-bottom: 12px;
+  padding: 5px 12px;
+  border-radius: 6px;
+  background: var(--accent-muted);
+  font-size: 0.625rem;
+  letter-spacing: 0.1em;
+  color: var(--accent);
 }
 
 .projects__title {
   font-size: 1.25rem;
+  font-weight: 600;
   margin-bottom: 8px;
+  letter-spacing: -0.02em;
 }
 
 .projects__desc {
-  color: var(--text-secondary);
+  color: var(--text-muted);
   font-size: 0.9375rem;
-  line-height: 1.6;
+  line-height: 1.7;
 }
 
 /* Contact */
 .contact__card {
-  margin-top: calc(var(--bento-gap) * 0.5);
-  padding: calc(var(--bento-gap) * 2);
-  max-width: 560px;
+  margin-top: calc(var(--gap) * 0.5);
+  padding: calc(var(--gap) * 1.75);
+  max-width: 500px;
+}
+
+@media (min-width: 769px) {
+  .contact__card {
+    padding: calc(var(--gap) * 2);
+  }
 }
 
 .contact__text {
-  color: var(--text-secondary);
-  margin-bottom: var(--bento-gap);
-  line-height: 1.6;
+  color: var(--text-muted);
+  margin-bottom: var(--gap);
+  font-size: 1rem;
+  line-height: 1.65;
 }
 
 .contact__links {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--bento-gap);
+  gap: var(--gap);
+  align-items: center;
 }
 
 .contact__link {
   font-weight: 500;
+  color: var(--accent);
 }
 
-/* Footer */
-.footer {
-  padding: var(--bento-gap) calc(var(--bento-gap) * 2);
-  border-top: 1px solid var(--glass-border);
-  text-align: center;
+.contact__link:hover {
+  color: var(--accent-hover);
 }
 
-.footer__copy {
-  font-size: 0.7rem;
-  color: var(--text-secondary);
+.contact__link:focus-visible {
+  outline-offset: 3px;
 }
 </style>

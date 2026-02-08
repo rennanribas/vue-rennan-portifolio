@@ -29,5 +29,6 @@ withDefaults(
 .glass-pane--no-hover:hover {
   transform: none;
   border-color: var(--glass-border);
+  box-shadow: var(--glass-shadow);
 }
 </style>

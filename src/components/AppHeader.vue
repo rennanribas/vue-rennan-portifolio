@@ -1,14 +1,15 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, watch, onMounted, onUnmounted } from 'vue'
+import { RouterLink } from 'vue-router'
 
 const scrolled = ref(false)
 const mobileMenuOpen = ref(false)
 
 const navLinks = [
-  { href: '#about', label: 'About' },
-  { href: '#experience', label: 'Experience' },
-  { href: '#projects', label: 'Projects' },
-  { href: '#contact', label: 'Contact' },
+  { href: '/#about', label: 'About' },
+  { href: '/#this-site', label: 'This site' },
+  { href: '/#contact', label: 'Contact' },
+  { to: '/features', label: 'Features', isRouter: true },
 ]
 
 function onScroll() {
@@ -19,11 +20,9 @@ function closeMobileMenu() {
   mobileMenuOpen.value = false
 }
 
-function onLogoClick(e: Event) {
-  e.preventDefault()
-  window.scrollTo({ top: 0, behavior: 'smooth' })
-  closeMobileMenu()
-}
+watch(mobileMenuOpen, (open) => {
+  document.body.classList.toggle('menu-open', open)
+})
 
 onMounted(() => {
   window.addEventListener('scroll', onScroll, { passive: true })
@@ -31,15 +30,22 @@ onMounted(() => {
 
 onUnmounted(() => {
   window.removeEventListener('scroll', onScroll)
+  document.body.classList.remove('menu-open')
 })
 </script>
 
 <template>
   <header class="app-header" :class="{ 'app-header--scrolled': scrolled }">
+    <div
+      v-if="mobileMenuOpen"
+      class="app-header__overlay"
+      aria-hidden="true"
+      @click="closeMobileMenu"
+    />
     <div class="app-header__inner">
-      <a href="#" class="app-header__logo" @click="onLogoClick">
+      <RouterLink to="/" class="app-header__logo" @click="closeMobileMenu">
         <span class="mono">Rennan Ribas</span>
-      </a>
+      </RouterLink>
       <button
         type="button"
         class="app-header__toggle"
@@ -52,15 +58,24 @@ onUnmounted(() => {
         <span class="app-header__toggle-bar" />
       </button>
       <nav class="app-header__nav" :class="{ 'app-header__nav--open': mobileMenuOpen }">
-        <a
-          v-for="link in navLinks"
-          :key="link.href"
-          :href="link.href"
-          class="app-header__link"
-          @click="closeMobileMenu"
-        >
-          {{ link.label }}
-        </a>
+        <template v-for="link in navLinks" :key="link.label">
+          <RouterLink
+            v-if="link.isRouter"
+            :to="link.to"
+            class="app-header__link"
+            @click="closeMobileMenu"
+          >
+            {{ link.label }}
+          </RouterLink>
+          <a
+            v-else
+            :href="link.href"
+            class="app-header__link"
+            @click="closeMobileMenu"
+          >
+            {{ link.label }}
+          </a>
+        </template>
       </nav>
     </div>
   </header>
@@ -73,9 +88,33 @@ onUnmounted(() => {
   left: 0;
   right: 0;
   z-index: 100;
-  padding: var(--bento-gap) calc(var(--bento-gap) * 2);
-  transition: background var(--spring-duration) var(--spring-easing),
-    backdrop-filter var(--spring-duration) var(--spring-easing);
+  padding: var(--gap) var(--container);
+  transition: background var(--duration) var(--ease-out),
+    backdrop-filter var(--duration) var(--ease-out);
+}
+
+.app-header__overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 0;
+}
+
+.app-header__inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap);
+}
+
+@media (min-width: 769px) {
+  .app-header__overlay {
+    display: none;
+  }
 }
 
 .app-header--scrolled {
@@ -83,62 +122,74 @@ onUnmounted(() => {
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
   border-bottom: 1px solid var(--glass-border);
-}
-
-.app-header__inner {
-  max-width: 1400px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--bento-gap);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
 }
 
 .app-header__logo {
-  color: var(--text-primary);
+  color: var(--text);
   font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.app-header__logo .mono {
+  color: inherit;
 }
 
 .app-header__logo:hover {
-  color: var(--color-signal);
+  color: var(--accent);
 }
 
 .app-header__toggle {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 6px;
-  padding: 8px;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 10px;
   background: none;
   border: none;
   cursor: pointer;
-  color: var(--text-primary);
+  color: var(--text);
+  border-radius: var(--radius);
 }
 
 .app-header__toggle-bar {
-  width: 24px;
+  width: 22px;
   height: 2px;
   background: currentColor;
   border-radius: 1px;
-  transition: transform var(--spring-duration) var(--spring-easing);
+  transition: transform var(--duration) var(--ease-out);
 }
 
 .app-header__nav {
   display: flex;
   align-items: center;
-  gap: calc(var(--bento-gap) * 1.5);
+  gap: calc(var(--gap) * 1.5);
 }
 
 .app-header__link {
-  color: var(--text-secondary);
+  color: var(--text-muted);
   font-size: 0.9375rem;
   font-weight: 500;
+  letter-spacing: -0.01em;
 }
 
 .app-header__link:hover {
-  color: var(--text-primary);
+  color: var(--text);
+}
+
+.app-header__link:focus-visible,
+.app-header__logo:focus-visible,
+.app-header__toggle:focus-visible {
+  border-radius: 6px;
 }
 
 @media (max-width: 768px) {
+  .app-header__overlay {
+    display: block;
+  }
+
   .app-header__toggle {
     display: flex;
   }
@@ -152,14 +203,15 @@ onUnmounted(() => {
     flex-direction: column;
     align-items: stretch;
     justify-content: center;
-    gap: var(--bento-gap);
-    padding: var(--bento-gap);
+    gap: var(--gap);
+    padding: var(--gap);
     background: var(--glass-bg);
     backdrop-filter: var(--glass-blur);
     -webkit-backdrop-filter: var(--glass-blur);
-    border-left: 1px solid var(--glass-border);
+    border-left: 1px solid var(--border);
+    box-shadow: -8px 0 32px rgba(0, 0, 0, 0.35);
     transform: translateX(100%);
-    transition: transform var(--spring-duration) var(--spring-easing);
+    transition: transform var(--duration) var(--ease-out);
   }
 
   .app-header__nav--open {
@@ -167,8 +219,11 @@ onUnmounted(() => {
   }
 
   .app-header__link {
-    font-size: 1.125rem;
-    padding: 12px 0;
+    font-size: 1.0625rem;
+    padding: 14px 0;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
   }
 }
 
