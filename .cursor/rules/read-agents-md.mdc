@@ -1,0 +1,8 @@
+---
+description: Use project root AGENTS.md for full context and conventions
+alwaysApply: true
+---
+
+# Project context
+
+All project structure, commands, and code conventions are in **AGENTS.md** at the repository root. Refer to that file for Vue, TypeScript, CSS, and workflow guidance.

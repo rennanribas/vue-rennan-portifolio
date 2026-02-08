@@ -28,3 +28,4 @@ npm install
 
 - **Content:** Edit `src/views/HomeView.vue` — update `experience` and `projects` arrays and contact links (email, LinkedIn, GitHub).
 - **Design tokens:** `src/assets/base.css` holds CSS variables (palette, glass, motion, grid).
+- **Agent context:** `AGENTS.md` (canonical). `.github/`: `copilot-instructions.md` (repo-wide), `instructions/*.instructions.md` (path-specific), `agents/*.agent.md` (Gate / Plan / Implement), `skills/*/SKILL.md` (project-context, anti-patterns).
